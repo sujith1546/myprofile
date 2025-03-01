@@ -35,34 +35,50 @@
       position: absolute;
       top: 0;
       bottom: 0;
-      left: 20px; /* Adjusted for mobile */
+      left: 50%;
       width: 6px;
       background: linear-gradient(to bottom, #0d47a1, #42a5f5);
+      transform: translateX(-50%);
       z-index: 1;
       border-radius: 10px;
     }
 
     .timeline-item {
-      padding: 30px 20px; /* Reduced padding for mobile */
+      padding: 30px 40px;
       position: relative;
-      width: 100%; /* Full width for mobile */
+      width: 50%;
       animation: fadeIn 1s ease-in-out;
       opacity: 0;
       transform: translateY(20px);
     }
 
+    .timeline-item:nth-child(odd) {
+      left: 0;
+    }
+
+    .timeline-item:nth-child(even) {
+      left: 50%;
+    }
+
     .timeline-item::before {
       content: '';
       position: absolute;
-      width: 20px;
-      height: 20px;
+      width: 25px;
+      height: 25px;
       border-radius: 50%;
       background: linear-gradient(to right, #0d47a1, #42a5f5);
       top: 40px;
-      left: -30px; /* Adjusted for mobile */
       z-index: 2;
       box-shadow: 0 0 15px rgba(13, 71, 161, 0.5);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .timeline-item:nth-child(odd)::before {
+      right: -12px;
+    }
+
+    .timeline-item:nth-child(even)::before {
+      left: -12px;
     }
 
     .timeline-item:hover::before {
@@ -72,48 +88,48 @@
 
     .timeline-content {
       background: #fff;
-      padding: 20px; /* Reduced padding for mobile */
-      border-radius: 15px; /* Slightly smaller radius */
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
       position: relative;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .timeline-content:hover {
-      transform: translateY(-5px); /* Smaller lift for mobile */
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
     }
 
     .timeline-content h2 {
-      font-size: 22px; /* Reduced font size for mobile */
+      font-size: 28px;
       color: #0d47a1;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
 
     .timeline-content p {
-      font-size: 16px; /* Reduced font size for mobile */
+      font-size: 18px;
       color: #555;
-      line-height: 1.6;
+      line-height: 1.8;
     }
 
     .timeline-content .education-stage {
-      font-size: 14px; /* Reduced font size for mobile */
+      font-size: 16px;
       color: #0d47a1;
       font-style: italic;
-      margin-top: 8px;
+      margin-top: 10px;
     }
 
     .timeline-content .location-badge {
       display: inline-block;
-      font-size: 12px; /* Reduced font size for mobile */
+      font-size: 14px;
       font-weight: bold;
       color: #fff;
       background: linear-gradient(to right, #ff7e5f, #feb47b);
-      padding: 5px 10px; /* Reduced padding for mobile */
-      border-radius: 15px;
-      margin-top: 8px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      margin-top: 10px;
       box-shadow: 0 3px 6px rgba(255, 126, 95, 0.3);
       transition: transform 0.3s ease;
     }
@@ -124,14 +140,14 @@
 
     .timeline-content .score-badge {
       display: inline-block;
-      font-size: 14px; /* Reduced font size for mobile */
+      font-size: 16px;
       font-weight: bold;
       color: #fff;
       background: linear-gradient(to right, #0d47a1, #42a5f5);
-      padding: 6px 12px; /* Reduced padding for mobile */
-      border-radius: 15px;
-      margin-top: 8px;
-      box-shadow: 0 3px 6px rgba(13, 71, 161, 0.3);
+      padding: 8px 15px;
+      border-radius: 20px;
+      margin-top: 10px;
+      box-shadow: 0 5px 10px rgba(13, 71, 161, 0.3);
       transition: transform 0.3s ease;
     }
 
@@ -150,54 +166,52 @@
       }
     }
 
-    /* Responsive Design */
-    @media (min-width: 768px) {
+    /* Responsive Design for Mobile */
+    @media (max-width: 768px) {
       .timeline::before {
-        left: 50%;
-        transform: translateX(-50%);
+        left: 20px; /* Adjusted for mobile */
       }
 
       .timeline-item {
-        width: 50%;
+        width: 100%; /* Full width for mobile */
+        padding-left: 60px; /* Adjusted for mobile */
+        padding-right: 20px;
       }
 
-      .timeline-item:nth-child(odd) {
+      .timeline-item:nth-child(odd),
+      .timeline-item:nth-child(even) {
         left: 0;
       }
 
-      .timeline-item:nth-child(even) {
-        left: 50%;
-      }
-
       .timeline-item::before {
-        left: -10px;
+        left: 10px; /* Adjusted for mobile */
       }
 
       .timeline-content {
-        padding: 30px;
-        border-radius: 20px;
+        padding: 20px; /* Reduced padding for mobile */
+        border-radius: 15px; /* Slightly smaller radius */
       }
 
       .timeline-content h2 {
-        font-size: 28px;
+        font-size: 22px; /* Reduced font size for mobile */
       }
 
       .timeline-content p {
-        font-size: 18px;
+        font-size: 16px; /* Reduced font size for mobile */
       }
 
       .timeline-content .education-stage {
-        font-size: 16px;
+        font-size: 14px; /* Reduced font size for mobile */
       }
 
       .timeline-content .location-badge {
-        font-size: 14px;
-        padding: 6px 12px;
+        font-size: 12px; /* Reduced font size for mobile */
+        padding: 5px 10px; /* Reduced padding for mobile */
       }
 
       .timeline-content .score-badge {
-        font-size: 16px;
-        padding: 8px 15px;
+        font-size: 14px; /* Reduced font size for mobile */
+        padding: 6px 12px; /* Reduced padding for mobile */
       }
     }
   </style>
@@ -278,12 +292,12 @@
     const timelineContents = document.querySelectorAll('.timeline-content');
     timelineContents.forEach((content) => {
       content.addEventListener('mouseenter', () => {
-        content.style.transform = 'translateY(-5px)';
-        content.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.2)';
+        content.style.transform = 'translateY(-10px)';
+        content.style.boxShadow = '0 15px 40px rgba(0, 0, 0, 0.2)';
       });
       content.addEventListener('mouseleave', () => {
         content.style.transform = 'translateY(0)';
-        content.style.boxShadow = '0 8px 20px rgba(0, 0, 0, 0.1)';
+        content.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
       });
     });
   </script>
