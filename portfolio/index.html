@@ -114,6 +114,25 @@
             transform: translateY(0);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+
+        /* Media Queries for Mobile Devices */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                padding: 20px;
+                box-shadow: none;
+            }
+            .main-content {
+                flex: 1;
+                padding: 20px;
+            }
+            .text-content {
+                padding: 20px;
+            }
+        }
     </style>
 </head>
 <body>
