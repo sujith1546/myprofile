@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            height: 100vh;
+            background: #f4f4f4;
+            overflow: hidden;
+        }
+        .sidebar {
+            width: 300px;
+            background: #d3d3d3;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 5px 0 10px rgba(0, 0, 0, 0.1);
+            overflow-y: auto; /* Allow scrolling within the sidebar if content overflows */
+        }
+        .sidebar img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            transition: all 0.3s ease; /* Smooth transition for hover effects */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Initial shadow */
+        }
+        .sidebar img:hover {
+            transform: scale(1.1); /* Slightly enlarge the image */
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+        }
+        .sidebar h2 {
+            font-size: 20px;
+            color: #333;
+        }
+        .sidebar p {
+            color: #555;
+            font-size: 14px;
+        }
+        .sidebar ul {
+            list-style: none;
+            margin-top: 20px;
+        }
+        .sidebar ul li {
+            margin: 15px 0;
+        }
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        .sidebar ul li a:hover,
+        .sidebar ul li a.active {
+            color: #007bff;
+            text-decoration: underline;
+        }
+        .main-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: left;
+            padding: 50px;
+            background: #ffffff;
+            position: relative;
+            overflow: hidden;
+        }
+        .scroll-container {
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+        .text-content {
+            max-width: 500px;
+            width: 100%;
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+            scroll-snap-align: start;
+            padding: 50px;
+            box-sizing: border-box;
+            margin-bottom: 100px; /* Add spacing between pages */
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 30px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 2px solid transparent;
+        }
+        .btn:hover {
+            background: #0056b3;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <img src="profile_photo.png" alt="Profile Picture">
+        <h2>Sujith Thota</h2>
+        <p>Student in VIT</p>
+        <ul>
+            <li><a href="#" data-page="home">HOME</a></li>
+            <li><a href="#" data-page="about">ABOUT</a></li>
+            <li><a href="#" data-page="services">SERVICES</a></li>
+            <li><a href="#" data-page="skills">SKILLS</a></li>
+            <li><a href="#" data-page="education">EDUCATION</a></li>
+            <li><a href="#" data-page="experience">EXPERIENCE</a></li>
+            <li><a href="#" data-page="work">WORK</a></li>
+            <li><a href="#" data-page="blog">BLOG</a></li>
+            <li><a href="#" data-page="contact">CONTACT</a></li>
+        </ul>
+        <p style="margin-top: 20px; font-size: 14px; color: #333;">&copy; 2025 All Rights Reserved Sujith</p>
+    </div>
+    <div class="main-content">
+        <div id="content-container" class="scroll-container">
+            <!-- Content will be dynamically loaded here -->
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            const links = document.querySelectorAll('.sidebar ul li a');
+            const contentContainer = document.getElementById('content-container');
+            const pages = Array.from(links).map(link => link.getAttribute('data-page'));
+            let currentPageIndex = 0; // Start with HOME as the default page
+
+            // Function to load content dynamically
+            const loadContent = async (page, targetElement) => {
+                try {
+                    const response = await fetch(`${page}.html?nocache=${Date.now()}`); // Cache-busting query
+                    if (!response.ok) {
+                        throw new Error(`Failed to load ${page}.html`);
+                    }
+                    const html = await response.text();
+                    targetElement.innerHTML = html;
+
+                    // Add logic to handle resume download button
+                    const resumeButton = targetElement.querySelector('.download-resume');
+                    if (resumeButton) {
+                        resumeButton.setAttribute('href', 'resume.pdf');
+                        resumeButton.setAttribute('download', 'resume.pdf');
+                    }
+                } catch (error) {
+                    console.error(error);
+                    targetElement.innerHTML = `<h1>Error</h1><p>Failed to load ${page} content.</p>`;
+                }
+            };
+
+            // Pre-create placeholders for all pages
+            pages.forEach((page, index) => {
+                const contentDiv = document.createElement('div');
+                contentDiv.className = 'text-content';
+                contentContainer.appendChild(contentDiv);
+
+                // Load content immediately for each page
+                loadContent(page, contentDiv);
+            });
+
+            // Scroll to a specific page programmatically
+            const scrollToPage = (pageIndex) => {
+                const targetElement = contentContainer.children[pageIndex];
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            };
+
+            // Add click event listeners to sidebar links
+            links.forEach((link, index) => {
+                link.addEventListener('click', async (e) => {
+                    e.preventDefault();
+
+                    // Temporarily disable scroll event listener to avoid interference
+                    contentContainer.removeEventListener('scroll', handleScroll);
+
+                    currentPageIndex = index;
+
+                    // Remove 'active' class from all links
+                    links.forEach(l => l.classList.remove('active'));
+
+                    // Add 'active' class to the clicked link
+                    link.classList.add('active');
+
+                    // Reload content for the clicked page
+                    const targetElement = contentContainer.children[currentPageIndex];
+                    await loadContent(pages[currentPageIndex], targetElement);
+
+                    scrollToPage(index);
+
+                    // Re-enable scroll event listener after scrolling
+                    setTimeout(() => {
+                        contentContainer.addEventListener('scroll', handleScroll);
+                    }, 500); // Adjust timeout to match scroll duration
+                });
+            });
+
+            // Handle manual scrolling
+            const handleScroll = () => {
+                const scrollTop = contentContainer.scrollTop;
+
+                // Calculate which page is currently visible at the top
+                let pageIndex = -1;
+
+                for (let i = 0; i < contentContainer.children.length; i++) {
+                    const child = contentContainer.children[i];
+                    const childTop = child.offsetTop;
+                    const childHeight = child.offsetHeight;
+
+                    // Check if the child's top is near the top of the viewport
+                    if (scrollTop >= childTop - 50 && scrollTop < childTop + childHeight - 50) {
+                        pageIndex = i;
+                        break;
+                    }
+                }
+
+                if (pageIndex !== -1 && pageIndex !== currentPageIndex) {
+                    currentPageIndex = pageIndex;
+
+                    // Highlight the corresponding sidebar link
+                    links.forEach((link, index) => {
+                        link.classList.toggle('active', index === currentPageIndex);
+                    });
+                }
+            };
+
+            // Attach the scroll event listener
+            contentContainer.addEventListener('scroll', handleScroll);
+
+            // Highlight the first link (HOME) by default
+            links[0].classList.add('active');
+        });
+    </script>
+</body>
+</html>
