@@ -76,7 +76,7 @@
       scroll-behavior: smooth;
     }
     .text-content {
-      max-width: 500px;
+      max-width: 100%; /* Full width on all devices */
       width: 100%;
       opacity: 1;
       transform: translateY(0);
@@ -113,7 +113,7 @@
     @media (max-width: 768px) {
       body {
         grid-template-columns: 150px 1fr; /* Reduce sidebar width on mobile */
-        overflow-x: auto; /* Allow horizontal scrolling on mobile if needed */
+        overflow-x: hidden; /* Prevent horizontal scrolling */
       }
       .sidebar {
         padding: 15px; /* Reduced padding on mobile */
@@ -140,10 +140,10 @@
         margin-bottom: 50px; /* Reduced spacing on mobile */
       }
       .text-content h1 {
-        font-size: 20px; /* Smaller heading size on mobile */
+        font-size: 18px; /* Smaller heading size on mobile */
       }
       .text-content h2 {
-        font-size: 18px; /* Smaller heading size on mobile */
+        font-size: 16px; /* Smaller heading size on mobile */
       }
       .text-content p {
         font-size: 12px; /* Smaller paragraph size on mobile */
