@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Career Timeline</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #ffffff; /* White background */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    .timeline {
+      position: relative;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 40px 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 6px;
+      background: linear-gradient(to bottom, #0d47a1, #42a5f5);
+      transform: translateX(-50%);
+      z-index: 1;
+      border-radius: 10px;
+    }
+
+    .timeline-item {
+      padding: 30px 40px;
+      position: relative;
+      width: 50%;
+      animation: fadeIn 1s ease-in-out;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .timeline-item:nth-child(odd) {
+      left: 0;
+    }
+
+    .timeline-item:nth-child(even) {
+      left: 50%;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      background: linear-gradient(to right, #0d47a1, #42a5f5);
+      top: 40px;
+      z-index: 2;
+      box-shadow: 0 0 15px rgba(13, 71, 161, 0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .timeline-item:nth-child(odd)::before {
+      right: -12px;
+    }
+
+    .timeline-item:nth-child(even)::before {
+      left: -12px;
+    }
+
+    .timeline-item:hover::before {
+      transform: scale(1.2);
+      box-shadow: 0 0 20px rgba(13, 71, 161, 0.8);
+    }
+
+    .timeline-content {
+      background: #fff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .timeline-content:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .timeline-content h2 {
+      font-size: 28px;
+      color: #0d47a1;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .timeline-content p {
+      font-size: 18px;
+      color: #555;
+      line-height: 1.8;
+    }
+
+    .timeline-content .education-stage {
+      font-size: 16px;
+      color: #0d47a1;
+      font-style: italic;
+      margin-top: 10px;
+    }
+
+    .timeline-content .location-badge {
+      display: inline-block;
+      font-size: 14px;
+      font-weight: bold;
+      color: #fff;
+      background: linear-gradient(to right, #ff7e5f, #feb47b);
+      padding: 6px 12px;
+      border-radius: 20px;
+      margin-top: 10px;
+      box-shadow: 0 3px 6px rgba(255, 126, 95, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .timeline-content .location-badge:hover {
+      transform: scale(1.1);
+    }
+
+    .timeline-content .score-badge {
+      display: inline-block;
+      font-size: 16px;
+      font-weight: bold;
+      color: #fff;
+      background: linear-gradient(to right, #0d47a1, #42a5f5);
+      padding: 8px 15px;
+      border-radius: 20px;
+      margin-top: 10px;
+      box-shadow: 0 5px 10px rgba(13, 71, 161, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .timeline-content .score-badge:hover {
+      transform: scale(1.1);
+    }
+
+    .timeline-content::before {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-style: solid;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content::before {
+      border-width: 15px 0 15px 15px;
+      border-color: transparent transparent transparent #fff;
+      right: -15px;
+      top: 30px;
+    }
+
+    .timeline-item:nth-child(even) .timeline-content::before {
+      border-width: 15px 15px 15px 0;
+      border-color: transparent #fff transparent transparent;
+      left: -15px;
+      top: 30px;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .timeline::before {
+        left: 20px;
+      }
+
+      .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+      }
+
+      .timeline-item:nth-child(odd),
+      .timeline-item:nth-child(even) {
+        left: 0;
+      }
+
+      .timeline-item::before {
+        left: 10px;
+      }
+
+      .timeline-item:nth-child(odd) .timeline-content::before,
+      .timeline-item:nth-child(even) .timeline-content::before {
+        left: -15px;
+        border-width: 15px 15px 15px 0;
+        border-color: transparent #fff transparent transparent;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="timeline">
+    <!-- Timeline Item 1 -->
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <h2>2009 - 2015</h2>
+        <p><strong>Aditya Birla Public School</strong></p>
+        <span class="location-badge">Thummalapenta</span>
+        <p class="education-stage">Primary to 4th Class</p>
+        <p>Completed my schooling with a strong foundation in academics and extracurricular activities.</p>
+      </div>
+    </div>
+
+    <!-- Timeline Item 2 -->
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <h2>2015 - 2019</h2>
+        <p><strong>Viswabharathi</strong></p>
+        <span class="location-badge">Gudivada</span>
+        <p class="education-stage">5th Class to 10th Class</p>
+        <p>Pursued high school education, focusing on science and mathematics.</p>
+        <span class="score-badge">Score: 100/100</span>
+      </div>
+    </div>
+
+    <!-- Timeline Item 3 -->
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <h2>2019 - 2022</h2>
+        <p><strong>Narayana Junior College</strong></p>
+        <span class="location-badge">Vijayawada</span>
+        <p class="education-stage">Intermediate</p>
+        <p>Prepared for competitive exams and completed intermediate education with a focus on engineering.</p>
+        <span class="score-badge">Score: 927/1000</span>
+      </div>
+    </div>
+
+    <!-- Timeline Item 4 -->
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <h2>2022 - 2025</h2>
+        <p><strong>VIT University</strong></p>
+        <span class="location-badge">Katpadi</span>
+        <p class="education-stage">BTech in Computer Science</p>
+        <p>Currently pursuing a degree in Computer Science, gaining expertise in programming, algorithms, and software development.</p>
+        <span class="score-badge">CGPA: 8.32</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Add animations to timeline items
+    const timelineItems = document.querySelectorAll('.timeline-item');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = 1;
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      },
+      {
+        threshold: 0.5,
+      }
+    );
+
+    timelineItems.forEach((item) => {
+      observer.observe(item);
+    });
+
+    // Add hover effects to timeline content
+    const timelineContents = document.querySelectorAll('.timeline-content');
+    timelineContents.forEach((content) => {
+      content.addEventListener('mouseenter', () => {
+        content.style.transform = 'translateY(-10px)';
+        content.style.boxShadow = '0 15px 40px rgba(0, 0, 0, 0.2)';
+      });
+      content.addEventListener('mouseleave', () => {
+        content.style.transform = 'translateY(0)';
+        content.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
+      });
+    });
+  </script>
+</body>
+</html>
