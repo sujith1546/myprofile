@@ -112,31 +112,14 @@
         /* Media Query for Mobile Devices */
         @media (max-width: 768px) {
             body {
-                grid-template-columns: 1fr; /* Single column layout on mobile */
-                grid-template-rows: auto 1fr; /* Sidebar on top, Main content below */
+                grid-template-columns: 300px 1fr; /* Same layout as desktop */
+                overflow-x: auto; /* Allow horizontal scrolling on mobile */
             }
             .sidebar {
-                width: 100%; /* Full width on mobile */
                 padding: 20px; /* Reduced padding on mobile */
-                height: auto; /* Allow sidebar to adjust height */
             }
             .main-content {
                 padding: 20px; /* Reduced padding on mobile */
-                height: calc(100vh - 200px); /* Fixed height for main content */
-                overflow-y: auto; /* Allow scrolling within the main content */
-            }
-            .sidebar img {
-                width: 80px; /* Smaller image on mobile */
-                height: 80px;
-            }
-            .sidebar h2 {
-                font-size: 18px; /* Smaller font size on mobile */
-            }
-            .sidebar p {
-                font-size: 12px; /* Smaller font size on mobile */
-            }
-            .sidebar ul li a {
-                font-size: 14px; /* Smaller font size on mobile */
             }
             .text-content {
                 max-width: 100%; /* Full width on mobile */
