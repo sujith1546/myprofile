@@ -112,11 +112,24 @@
         /* Media Query for Mobile Devices */
         @media (max-width: 768px) {
             body {
-                grid-template-columns: 300px 1fr; /* Same layout as desktop */
+                grid-template-columns: 150px 1fr; /* Reduce sidebar width on mobile */
                 overflow-x: auto; /* Allow horizontal scrolling on mobile */
             }
             .sidebar {
-                padding: 20px; /* Reduced padding on mobile */
+                padding: 15px; /* Reduced padding on mobile */
+            }
+            .sidebar img {
+                width: 60px; /* Smaller image on mobile */
+                height: 60px;
+            }
+            .sidebar h2 {
+                font-size: 16px; /* Smaller font size on mobile */
+            }
+            .sidebar p {
+                font-size: 12px; /* Smaller font size on mobile */
+            }
+            .sidebar ul li a {
+                font-size: 14px; /* Smaller font size on mobile */
             }
             .main-content {
                 padding: 20px; /* Reduced padding on mobile */
