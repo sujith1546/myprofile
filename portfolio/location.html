@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Me</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      line-height: 1.6;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    header {
+      text-align: center;
+      padding: 20px;
+      background-color: #333;
+      color: white;
+    }
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    .profile-photo {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+      border: 4px solid #007BFF;
+      transition: transform 0.5s ease, border-color 0.5s ease;
+    }
+    .profile-photo:hover {
+      transform: scale(1.1);
+      border-color: #28a745;
+    }
+    h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+    h2 {
+      font-size: 22px;
+      color: #007BFF;
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+    .cgpa {
+      font-weight: bold;
+      color: #28a745;
+    }
+    .social-links {
+      margin-top: 20px;
+    }
+    .social-links a {
+      display: inline-block;
+      margin: 0 10px;
+      text-decoration: none;
+      color: #007BFF;
+      font-size: 24px;
+      transition: color 0.3s ease;
+    }
+    .social-links a:hover {
+      color: #28a745;
+    }
+    hr {
+      border: 0;
+      height: 1px;
+      background: #ccc;
+      margin: 20px 0;
+    }
+    /* Dark Mode Styles */
+    body.dark-mode {
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+    body.dark-mode header {
+      background-color: #1e1e1e;
+    }
+    body.dark-mode .container {
+      background-color: #1e1e1e;
+      color: #e0e0e0;
+    }
+    body.dark-mode .profile-photo {
+      border-color: #bb86fc;
+    }
+    /* Countdown Timer */
+    .countdown {
+      font-size: 20px;
+      margin: 20px 0;
+    }
+    /* QR Code */
+    .qr-code img {
+      width: 150px;
+      margin-top: 20px;
+    }
+    /* Visitor Counter */
+    .visitor-counter {
+      font-size: 18px;
+      margin: 20px 0;
+      color: #28a745;
+    }
+    /* Blue Text for B.Tech in CSE (Data Science) */
+    .blue-text {
+      color: #007BFF;
+      font-weight: bold;
+    }
+    /* Scroll-to-Top Button */
+    #scrollToTop {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: none;
+    }
+    #scrollToTop:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>About Me</h1>
+    <!-- Dark/Light Mode Toggle -->
+    <button id="themeToggle">Switch to Dark Mode</button>
+  </header>
+
+  <div class="container">
+    <!-- Personalized Greeting -->
+    <p id="greeting"></p>
+
+    <!-- Profile Photo -->
+    <img src="profile_photo.png" alt="Profile Photo" class="profile-photo" id="profilePhoto">
+
+    <!-- Name -->
+    <h1>Thota Sujith Reddy</h1>
+
+    <!-- Tagline -->
+    <h2>I am a <span class="dynamic-text"></span></h2>
+
+    <!-- Branch and University -->
+    <p><strong class="blue-text">B.Tech in Computer Science and Engineering (Data Science)</strong></p>
+    <p><strong>VIT University, Vellore</strong></p>
+
+    <!-- CGPA Information -->
+    <p>My current CGPA is <span class="cgpa">8.32</span>, and I am working hard to improve it further.</p>
+
+    <!-- Year of Study -->
+    <p>I am currently in my <strong>3rd year</strong> of study.</p>
+
+    <!-- Countdown Timer -->
+    <div class="countdown">
+      Graduation in: <span id="countdown"></span>
+    </div>
+
+    <!-- Social Links -->
+    <div class="social-links">
+      <a href="https://www.linkedin.com/in/your-profile" target="_blank">🔗 LinkedIn</a>
+      <a href="https://github.com/your-profile" target="_blank">🐙 GitHub</a>
+      <a href="https://www.instagram.com/your-profile" target="_blank">📸 Instagram</a>
+    </div>
+
+    <!-- QR Code -->
+    <div class="qr-code">
+      <p>Scan this QR code to connect with me:</p>
+      <img src="qr_code.png" alt="QR Code">
+    </div>
+
+    <!-- Real-Time Visitor Counter -->
+    <div class="visitor-counter">
+      Visitors: <span id="visitorCount">Loading...</span>
+    </div>
+
+    <!-- Scroll-to-Top Button -->
+    <button id="scrollToTop" title="Go to top">↑</button>
+  </div>
+
+  <script>
+    // JavaScript to add interactivity
+
+    // Animate profile photo on hover
+    const profilePhoto = document.getElementById('profilePhoto');
+    profilePhoto.addEventListener('mouseenter', () => {
+      profilePhoto.style.transform = 'scale(1.1)';
+      profilePhoto.style.borderColor = '#28a745';
+    });
+    profilePhoto.addEventListener('mouseleave', () => {
+      profilePhoto.style.transform = 'scale(1)';
+      profilePhoto.style.borderColor = '#007BFF';
+    });
+
+    // Dark/Light Mode Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+    let isDarkMode = false;
+
+    themeToggle.addEventListener('click', () => {
+      isDarkMode = !isDarkMode;
+      body.classList.toggle('dark-mode');
+      themeToggle.textContent = isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode';
+    });
+
+    // Personalized Greeting Based on Time
+    const greetingElement = document.getElementById('greeting');
+    const hour = new Date().getHours();
+    if (hour < 12) {
+      greetingElement.textContent = "Good Morning! Welcome to my profile.";
+    } else if (hour < 18) {
+      greetingElement.textContent = "Good Afternoon! Welcome to my profile.";
+    } else {
+      greetingElement.textContent = "Good Evening! Welcome to my profile.";
+    }
+
+    // Countdown Timer
+    const countdownElement = document.getElementById('countdown');
+    const graduationDate = new Date('May 30, 2026 00:00:00').getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = graduationDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+      countdownElement.textContent = `${days}d ${hours}h ${minutes}m`;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // Dynamic Tagline
+    const texts = ["Data Science Enthusiast", "Problem Solver", "Tech Innovator"];
+    let index = 0;
+    const dynamicTextElement = document.querySelector('.dynamic-text');
+
+    function updateTagline() {
+      dynamicTextElement.textContent = texts[index];
+      index = (index + 1) % texts.length;
+    }
+
+    setInterval(updateTagline, 2000); // Change text every 2 seconds
+
+    // Real-Time Visitor Counter with Fallback
+    const visitorCountElement = document.getElementById('visitorCount');
+    fetch('https://api.countapi.xyz/hit/mywebsite/visits') // Replace "mywebsite" with your unique key
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch visitor count.');
+        }
+        return response.json();
+      })
+      .then(data => {
+        visitorCountElement.textContent = data.value;
+      })
+      .catch(error => {
+        console.error('Error fetching visitor count:', error);
+        visitorCountElement.textContent = 'Fallback Count: 100'; // Fallback value
+      });
+
+    // Scroll-to-Top Button
+    const scrollToTopButton = document.getElementById('scrollToTop');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 200) {
+        scrollToTopButton.style.display = 'block';
+      } else {
+        scrollToTopButton.style.display = 'none';
+      }
+    });
+
+    scrollToTopButton.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
